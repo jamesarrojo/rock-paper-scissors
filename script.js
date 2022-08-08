@@ -1,55 +1,57 @@
+let computerScore = 0
+let playerScore = 0
+
+const computerScoreDisplay = document.querySelector('#computer-score')
+const playerScoreDisplay = document.querySelector('#player-score')
+
+const resultDisplay = document.querySelector('#result')
+
+const rockBtn = document.querySelector('#rock')
+const paperBtn = document.querySelector('#paper')
+const scissorsBtn = document.querySelector('#scissors')
+
+
+
+
+// takes computer's choice
 function getComputerChoice() {
-    let choices = ["Rock", "Paper", "Scissors"]
+    let choices = ["rock", "paper", "scissors"]
     let random = Math.floor(Math.random() * 3)
     return choices[random]
 }
 
-function playerSelection() {
-    return prompt(alert("Please enter: 'Rock', 'Paper', or 'Scissors'"))
-}
 
-
-function playRound(i) {
-    let computerChoice = getComputerChoice().toLowerCase()
-    let playerChoice = playerSelection().toLowerCase()
+// compares the choice of player and computer and scores them
+function game(playerChoice) {
+    let computerChoice = getComputerChoice()
 
     if (playerChoice === computerChoice) {
-        console.log(`Round ${i+1}: Draw! You both played ${computerChoice}`)
+        resultDisplay.innerHTML = `Draw! You both played ${computerChoice}`
     } else if ((playerChoice === "rock" && computerChoice === "paper") || (playerChoice === "paper" && computerChoice === "scissors") || (playerChoice === "scissors" && computerChoice === "rock")) {
-        console.log(`Round ${i+1}: You Lose! ${computerChoice} beats ${playerChoice}`)
-        return 0
+        computerScore++
+        computerScoreDisplay.innerHTML = computerScore
+        resultDisplay.innerHTML = `You Lose! ${computerChoice} beats ${playerChoice}`
     } else {
-        console.log(`Round ${i+1}: You Win! ${playerChoice} beats ${computerChoice}`)
-        return 1
+        playerScore++
+        playerScoreDisplay.innerHTML = playerScore
+        resultDisplay.innerHTML = `You Win! ${playerChoice} beats ${computerChoice}`
     }
 }
 
 
-
-function game() {
-    let computerScore = 0
-    let playerScore = 0
-
-    for (let i = 0; i < 5; i++) {
-        let result = playRound(i)
-        if (result === 1) {
-            playerScore++
-        } else if (result === 0) {
-            computerScore++
-        }
-        console.log(`You: ${playerScore} | Computer: ${computerScore}`)
-    }
-
-    if (playerScore > computerScore) {
-        return "Congratulations! You Won!"
-    } else if (playerScore < computerScore) {
-        return "Sorry, You Lose. :("
-    } else {
-        return "Its a draw!"
-    }
-
-
-
+// takes player's choice
+function main() {
+    rockBtn.addEventListener('click', function() {
+        game("rock")
+    })
+    
+    paperBtn.addEventListener('click', function() {
+        game("paper")
+    })
+    
+    scissorsBtn.addEventListener('click', function() {
+        game("scissors")
+    })
 }
 
-console.log(game())
+main()
