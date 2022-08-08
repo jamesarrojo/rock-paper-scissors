@@ -5,8 +5,33 @@
 }
 
 
-h1  {
+h1, #result  {
     text-align: center;
+    margin: 50px 0;
 }
 
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
 
+.player, .computer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    
+}
+
+.buttons a {
+    font-size: 100px;
+    text-decoration: none;
+    color: brown;
+}
